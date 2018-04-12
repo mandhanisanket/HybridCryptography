@@ -10,9 +10,9 @@ from Crypto.Signature import PKCS1_v1_5
 # Define public and private key names for faster usage
 
 # Sender's public key:
-pubKey = "A_PublicKey.pem"
+pubKey = "pubKey.pem"
 # Receiver's private key:
-priKey = "B_PrivateKey.pem"
+priKey = "priKey.pem"
 
 # File name to decrypt
 f_name = ""
