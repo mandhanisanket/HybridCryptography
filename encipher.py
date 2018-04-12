@@ -12,9 +12,9 @@ from Crypto.Signature import PKCS1_v1_5
 # Define public and private key names for faster usage
 
 # Sender's private key:
-priKey = "priKey.pem"
+#priKey = "priKey.pem"
 # Receiver's public key:
-pubKey = "pubKey.pem"
+#pubKey = "pubKey.pem"
 
 # File name to encrypt
 f_name = ""
@@ -166,22 +166,22 @@ def checkFiles(f_name, pubKey, priKey):
 
 # Gathering encrypting file name
 
-if len(sys.argv) > 2:
-    usage()
-elif len(sys.argv) == 1:
-    print "File name:"
-    f_name = raw_input(">>> ")
-else:
-    f_name = sys.argv[1]
+#if len(sys.argv) > 2:
+    #usage()
+#elif len(sys.argv) == 1:
+    #print "File name:"
+    #f_name = raw_input(">>> ")
+#else:
+    #f_name = sys.argv[1]
 
 # Gathering names of keys
 
-if priKey == "":
-    print "Sender's private key file name:"
-    priKey = raw_input(">>> ")
-if pubKey == "":
-    print "Receiver's public key file name:"
-    pubKey = raw_input(">>> ")
+#if priKey == "":
+    #print "Sender's private key file name:"
+    #priKey = raw_input(">>> ")
+#if pubKey == "":
+    #print "Receiver's public key file name:"
+    #pubKey = raw_input(">>> ")
 
 # Running checks to files
 
@@ -189,14 +189,14 @@ if pubKey == "":
 
 # Reading password if not assigned:
 
-if priPass == "":
-    print "Private key password (ENTER for empty value):"
-    priPass = raw_input(">>> ")
+#if priPass == "":
+    #print "Private key password (ENTER for empty value):"
+    #priPass = " "
 
 # Ciphering file (and generating all auxiliary files)
 
-encipher(priKey, pubKey, f_name, priPass)
+#encipher(priKey, pubKey, f_name, "abc")
 
 # Generating output file and clean up
 
-auxFilesZip(f_name.split('.')[0] + ".sig", f_name.split('.')[0] + ".key", f_name.split('.')[0] + ".bin")
+#auxFilesZip(f_name.split('.')[0] + ".sig", f_name.split('.')[0] + ".key", f_name.split('.')[0] + ".bin")
