@@ -1,16 +1,16 @@
-from Crypto.PublicKey import RSA
+ffrom Crypto.PublicKey import RSA
 
+def genkey():
+    keyPair = RSA.generate(1024)
 
-keyPair = RSA.generate(1024)
+    # For PrivateKey Generation
 
-# For PrivateKey Generation
+    f = open("priKey.pem", "w")
+    f.write(keyPair.exportKey("PEM", "abc"))
+    f.close()
+    # For PublicKey Generation
 
-f = open("priKey.pem", "w")
-f.write(keyPair.exportKey("PEM", raw_input("Password to cipher key with:\n>>> ")))
-f.close()
-
-# For PublicKey Generation
-
-f = open("pubKey.pem", "w")
-f.write(str(keyPair.publickey().exportKey()))
-f.close()
+    f = open("pubKey.pem", "w")
+    f.write(str(keyPair.publickey().exportKey()))
+    f.close()
+    
