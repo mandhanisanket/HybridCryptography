@@ -1,57 +1,82 @@
-# -*- coding: utf-8 -*-
+from PyQt4 import QtCore, QtGui
+from enter_key import Ui_Dialog4
 
-# Form implementation generated from reading ui file 'upload.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
-import sys
-from PyQt5.QtCore import pyqtSignal
-from PyQt5 import QtCore, QtGui, QtWidgets
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_Dialog2(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(452, 336)
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(120, 90, 81, 31))
+        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.resize(473, 343)
+        self.label = QtGui.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(150, 70, 181, 31))
         font = QtGui.QFont()
-        font.setPointSize(11)
+        font.setPointSize(18)
         self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(180, 190, 75, 23))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.file_name = QtWidgets.QLineEdit(Dialog)
-        self.file_name.setGeometry(QtCore.QRect(220, 100, 113, 20))
-        self.file_name.setObjectName("file_name")
-        self.select = QtWidgets.QPushButton(Dialog)
-        self.select.setGeometry(QtCore.QRect(350, 100, 75, 23))
-        self.select.setObjectName("select")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.label_2 = QtGui.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(40, 150, 160, 21))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.upload_edit = QtGui.QLineEdit(Dialog)
+        self.upload_edit.setGeometry(QtCore.QRect(200, 150, 113, 20))
+        self.upload_edit.setObjectName(_fromUtf8("upload_edit"))
+        self.up_select_btn = QtGui.QPushButton(Dialog)
+        self.up_select_btn.setGeometry(QtCore.QRect(320, 150, 75, 23))
+        self.up_select_btn.setObjectName(_fromUtf8("up_select_btn"))
+        self.up_select_btn.clicked.connect(self.button_click)
 
-        self.select.clicked.connect(self.button_click)
+        self.upload_btn = QtGui.QPushButton(Dialog)
+        self.upload_btn.setGeometry(QtCore.QRect(200, 200, 75, 23))
+        self.upload_btn.setObjectName(_fromUtf8("upload_btn"))
+        #self.upload_btn.clicked.connect(self.openwindow)
+        self.upload_btn.clicked.connect(self.generate)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
+        
+    def generate(bits, progress_func=None):
+        rsa = RSA.generate(bits, rng.read, progress_func)
+        key = RSAKey(vals=(rsa.e, rsa.n))
+        key.d = rsa.d
+        key.p = rsa.p
+        key.q = rsa.q
+        return key 
+        
+    #def openwindow(self):
+        #self.window1 = QtGui.QDialog()
+        #self.ui = Ui_Dialog4()
+        #self.ui.setupUi(self.window1)
+        #self.window1.show()
+        	
     def button_click(self):
-        shost = self.file_name.text()
+        shost = self.upload_edit.text()
         print(shost)
 
     def retranslateUi(self, Dialog):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label.setText(_translate("Dialog", "Select a File:"))
-        self.pushButton_2.setText(_translate("Dialog", "Upload"))
-        self.select.setText(_translate("Dialog", "Select"))
+        Dialog.setWindowTitle(_translate("Dialog", "Upload File", None))
+        self.label.setText(_translate("Dialog", "Upload File", None))
+        self.label_2.setText(_translate("Dialog", "Type the name of file:", None))
+        self.up_select_btn.setText(_translate("Dialog", "Select", None))
+        self.upload_btn.setText(_translate("Dialog", "Upload", None))
 
 
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog2 = QtWidgets.QDialog()
+    app = QtGui.QApplication(sys.argv)
+    Dialog2 = QtGui.QDialog()
     ui = Ui_Dialog2()
     ui.setupUi(Dialog2)
     Dialog2.show()
     sys.exit(app.exec_())
-
