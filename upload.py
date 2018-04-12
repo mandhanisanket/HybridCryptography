@@ -1,5 +1,15 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'upload1.ui'
+#
+# Created by: PyQt4 UI code generator 4.11.4
+#
+# WARNING! All changes made in this file will be lost!
+
 from PyQt4 import QtCore, QtGui
-from enter_key import Ui_Dialog4
+from generateKeys import genkey
+from encipher import encipher
+#from encipher import auxFilesZip
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -14,6 +24,11 @@ try:
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
+
+# Sender's private key:
+priKey = "priKey.pem"
+# Receiver's public key:
+pubKey = "pubKey.pem"
 
 class Ui_Dialog2(object):
     def setupUi(self, Dialog):
@@ -40,30 +55,29 @@ class Ui_Dialog2(object):
         self.upload_btn = QtGui.QPushButton(Dialog)
         self.upload_btn.setGeometry(QtCore.QRect(200, 200, 75, 23))
         self.upload_btn.setObjectName(_fromUtf8("upload_btn"))
-        #self.upload_btn.clicked.connect(self.openwindow)
-        self.upload_btn.clicked.connect(self.generate)
-
+        self.upload_btn.clicked.connect(self.button_click1)
+        
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
-    def generate(bits, progress_func=None):
-        rsa = RSA.generate(bits, rng.read, progress_func)
-        key = RSAKey(vals=(rsa.e, rsa.n))
-        key.d = rsa.d
-        key.p = rsa.p
-        key.q = rsa.q
-        return key 
-        
-    #def openwindow(self):
-        #self.window1 = QtGui.QDialog()
-        #self.ui = Ui_Dialog4()
-        #self.ui.setupUi(self.window1)
-        #self.window1.show()
+    def openwindow(self):
+        self.window1 = QtGui.QDialog()
+        self.ui = Ui_Dialog4()
+        self.ui.setupUi(self.window1)
+        self.window1.show()
         	
     def button_click(self):
         shost = self.upload_edit.text()
+        genkey() 
         print(shost)
-
+        
+    def button_click1(self):
+        shost = self.upload_edit.text()
+        encipher(priKey, pubKey, shost, "abc")
+        #auxFilesZip(shost.split('.')[0] + ".sig", shost.split('.')[0] + ".key", shost.split('.')[0] + ".bin") 
+        print(shost)
+        
+        
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Upload File", None))
         self.label.setText(_translate("Dialog", "Upload File", None))
