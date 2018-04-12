@@ -12,9 +12,9 @@ from Crypto.Signature import PKCS1_v1_5
 # Define public and private key names for faster usage
 
 # Sender's private key:
-priKey = "A_PrivateKey.pem"
+priKey = "priKey.pem"
 # Receiver's public key:
-pubKey = "B_PublicKey.pem"
+pubKey = "pubKey.pem"
 
 # File name to encrypt
 f_name = ""
@@ -35,7 +35,7 @@ def sigGenerator(priKey_fname, f_name, priPass):
     buffer = f.read()
     f.close()
 
-    # Creating hash of the file. Using SHA-256 (SHA-512 rose problems)
+    # Creating hash of the file. Using SHA-256 
 
     h = SHA256.new(buffer)
 
