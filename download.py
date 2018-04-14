@@ -1,5 +1,6 @@
 from PyQt4 import QtCore, QtGui
-from enter_key import Ui_Dialog4
+from decipher import decipher
+from decipher import cleanUp
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -14,6 +15,11 @@ try:
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
+
+# Sender's public key:
+pubKey = "pubKey.pem"
+# Receiver's private key:
+priKey = "priKey.pem"
 
 class Ui_Dialog3(object):
     def setupUi(self, Dialog):
@@ -32,34 +38,25 @@ class Ui_Dialog3(object):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName(_fromUtf8("label"))
-        self.down_select_btn = QtGui.QPushButton(Dialog)
-        self.down_select_btn.setGeometry(QtCore.QRect(320, 150, 75, 23))
-        self.down_select_btn.setObjectName(_fromUtf8("down_select_btn"))
-        self.down_select_btn.clicked.connect(self.button_click)
-        
         self.download_btn = QtGui.QPushButton(Dialog)
         self.download_btn.setGeometry(QtCore.QRect(200, 190, 75, 23))
         self.download_btn.setObjectName(_fromUtf8("download_btn"))
-        self.download_btn.clicked.connect(self.openwindow)
+        self.download_btn.clicked.connect(self.button_click1)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
-    def openwindow(self):
-        self.window1 = QtGui.QDialog()
-        self.ui = Ui_Dialog4()
-        self.ui.setupUi(self.window1)
-        self.window1.show()
         	
-    def button_click(self):
-        shost1 = self.download_edit.text()
-        print(shost1)
+    def button_click1(self):
+        shost = self.download_edit.text()
+        decipher(pubKey, priKey, shost, "abc")
+        cleanUp(shost + ".sig", shost + ".key", shost + ".bin")
+        print(shost)
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Download File", None))
         self.label_2.setText(_translate("Dialog", "Type the name of file:", None))
         self.label.setText(_translate("Dialog", "Download File", None))
-        self.down_select_btn.setText(_translate("Dialog", "Select", None))
         self.download_btn.setText(_translate("Dialog", "Download", None))
 
 
