@@ -1,15 +1,7 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'upload1.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
 from generateKeys import genkey
 from encipher import encipher
-#from encipher import auxFilesZip
+from encipher import cleanUp
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -74,7 +66,7 @@ class Ui_Dialog2(object):
     def button_click1(self):
         shost = self.upload_edit.text()
         encipher(priKey, pubKey, shost, "abc")
-        #auxFilesZip(shost.split('.')[0] + ".sig", shost.split('.')[0] + ".key", shost.split('.')[0] + ".bin") 
+        cleanUp(shost)
         print(shost)
         
         
