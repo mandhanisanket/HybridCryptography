@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'upload1.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
 from upload1 import Ui_Dialog2
 from download1 import Ui_Dialog3
@@ -43,17 +35,17 @@ class Ui_welcomed(object):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(473, 348)
         self.upload_btn = QtGui.QPushButton(Dialog)
-        self.upload_btn.setGeometry(QtCore.QRect(175, 120, 110, 23))
+        self.upload_btn.setGeometry(QtCore.QRect(175, 150, 110, 23))
         self.upload_btn.setObjectName(_fromUtf8("upload_btn"))
         self.upload_btn.clicked.connect(self.openWindow1)
         
         self.download_btn = QtGui.QPushButton(Dialog)
-        self.download_btn.setGeometry(QtCore.QRect(175, 170, 110, 23))
+        self.download_btn.setGeometry(QtCore.QRect(175, 200, 110, 23))
         self.download_btn.setObjectName(_fromUtf8("download_btn"))
         self.download_btn.clicked.connect(self.openWindow2)
         
         self.label = QtGui.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(150, 60, 161, 41))
+        self.label.setGeometry(QtCore.QRect(150, 90, 161, 41))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.label.setFont(font)
@@ -76,5 +68,6 @@ if __name__ == "__main__":
     welcomed = QtGui.QDialog()
     ui = Ui_welcomed()
     ui.setupUi(welcomed)
+    
     welcomed.show()
     sys.exit(app.exec_())
