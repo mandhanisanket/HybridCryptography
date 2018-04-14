@@ -6,14 +6,6 @@ from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5
 
-
-# Define public and private key names for faster usage
-
-# Sender's public key:
-pubKey = "pubKey.pem"
-# Receiver's private key:
-priKey = "priKey.pem"
-
 # File name to decrypt
 f_name = ""
 
@@ -39,7 +31,7 @@ def sigVerification(pubKey_fname, f_name):
 
     # If signature is right, prints SHA-256. Otherwise states that the file is not authentic
 
-    if keyVerifier.verify(h, open(f_name.split('.')[0] + ".sig", "r").read()):
+    if keyVerifier.verify(h, open(f_name + ".sig", "r").read()):
         print "The signature is authentic."
         print "SHA-256 -> %s" % h.hexdigest()
     else:
@@ -54,7 +46,7 @@ def keyReader(privKey_fname, f_name, priPass):
 
     # Reading iv and symmetric key used during encryption
 
-    f = open(f_name.split('.')[0] + ".key", "r")
+    f = open(f_name + ".key", "r")
     iv = f.read(16)
     k = keyDecipher.decrypt(f.read())
 
@@ -76,7 +68,7 @@ def decipher(keyA_fname, keyB_fname, f_name, priPass):
 
     # Running a Signature verification
 
-    sigVerification(keyA_fname, f_name.split('.')[0])
+    sigVerification(keyA_fname, f_name)
 
 
 def auxFilesUnzip(all):
@@ -89,13 +81,12 @@ def auxFilesUnzip(all):
     f.extractall()
 
 
-def cleanUp(sig, key, bin, all):
+def cleanUp(sig, key, bin):
     # Removing all of the files created, except for the final deciphered file
 
     os.remove(sig)
     os.remove(key)
     os.remove(bin)
-    os.remove(all)
 
 
 def checkFiles(f_name, pubKey, priKey, first_run):
@@ -138,51 +129,3 @@ def checkFiles(f_name, pubKey, priKey, first_run):
         if os.path.isfile(f_name) and not os.access(f_name, os.W_OK):
             print "Can't create output file. Aborting..."
             sys.exit(5)
-
-
-# Gathering encrypting file name
-
-if len(sys.argv) > 2:
-    usage()
-elif len(sys.argv) == 1:
-    print "File name:"
-    f_name = raw_input(">>> ")
-else:
-    f_name = sys.argv[1]
-
-# Gathering names of keys
-
-if pubKey == "":
-    print "Sender's public key file name:"
-    pubKey = raw_input(">>> ")
-if priKey == "":
-    print "Receiver's private key file name:"
-    priKey = raw_input(">>> ")
-
-f_name = f_name.split('.')[0]
-
-# Checking for *.all file and keys' files
-
-checkFiles(f_name, pubKey, priKey, True)
-
-# Unzipping all files
-
-auxFilesUnzip(f_name)
-
-# Checking for *.sig, *.key, *.bin files
-
-checkFiles(f_name, pubKey, priKey, False)
-
-# Reading password if not assigned
-
-if priPass == "":
-    print "Private key password (ENTER for empty value):"
-    priPass = raw_input(">>> ")
-
-# Deciphering file
-
-decipher(pubKey, priKey, f_name, priPass)
-
-# Cleaning all files but the deciphered file
-
-cleanUp(f_name + ".sig", f_name + ".key", f_name + ".bin", f_name + ".all")
