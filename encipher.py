@@ -8,18 +8,10 @@ from Crypto.PublicKey import RSA
 from Crypto.Random import random
 from Crypto.Signature import PKCS1_v1_5
 
-
-# Define public and private key names for faster usage
-
-# Sender's private key:
-#priKey = "priKey.pem"
-# Receiver's public key:
-#pubKey = "pubKey.pem"
-
 # File name to encrypt
 f_name = ""
 
-# Private key password: (Given keys have no password)
+# Private key password: 
 priPass = ""
 
 
@@ -119,12 +111,9 @@ def auxFilesZip(sig, key, bin):
     cleanUp(sig, key, bin)
 
 
-def cleanUp(sig, key, bin):
-    # Deleting each of the files generated during ciphering
+def cleanUp(f_name):
 
-    os.remove(sig)
-    os.remove(key)
-    os.remove(bin)
+    os.remove(f_name)
 
 
 def checkFiles(f_name, pubKey, priKey):
@@ -162,41 +151,3 @@ def checkFiles(f_name, pubKey, priKey):
     if not os.path.isfile(priKey) or not os.access(priKey, os.R_OK):
         print "Invalid private key file. Aborting..."
         sys.exit(7)
-
-
-# Gathering encrypting file name
-
-#if len(sys.argv) > 2:
-    #usage()
-#elif len(sys.argv) == 1:
-    #print "File name:"
-    #f_name = raw_input(">>> ")
-#else:
-    #f_name = sys.argv[1]
-
-# Gathering names of keys
-
-#if priKey == "":
-    #print "Sender's private key file name:"
-    #priKey = raw_input(">>> ")
-#if pubKey == "":
-    #print "Receiver's public key file name:"
-    #pubKey = raw_input(">>> ")
-
-# Running checks to files
-
-#checkFiles(f_name, pubKey, priKey)
-
-# Reading password if not assigned:
-
-#if priPass == "":
-    #print "Private key password (ENTER for empty value):"
-    #priPass = " "
-
-# Ciphering file (and generating all auxiliary files)
-
-#encipher(priKey, pubKey, f_name, "abc")
-
-# Generating output file and clean up
-
-#auxFilesZip(f_name.split('.')[0] + ".sig", f_name.split('.')[0] + ".key", f_name.split('.')[0] + ".bin")
