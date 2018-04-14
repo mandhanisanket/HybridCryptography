@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'login1.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
 from welcome1 import Ui_welcomed
 import _mysql
@@ -36,7 +28,7 @@ class Ui_Login(object):
     def loginCheck(self):
          username = self.uname_linedit.text()
          password = self.pass_edit.text()
-	 connection = _mysql.connect('localhost', 'root', '1234', 'login')
+	     connection = _mysql.connect('localhost', 'root', '1234', 'login')
          connection.query("SELECT * FROM USERS;")
          result=connection.use_result()
     	 #print(result.fetch_row())
@@ -50,33 +42,33 @@ class Ui_Login(object):
         Login.setObjectName(_fromUtf8("Login"))
         Login.resize(476, 347)
         self.label = QtGui.QLabel(Login)
-        self.label.setGeometry(QtCore.QRect(110, 130, 71, 16))
+        self.label.setGeometry(QtCore.QRect(130, 130, 71, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName(_fromUtf8("label"))
         self.label_2 = QtGui.QLabel(Login)
-        self.label_2.setGeometry(QtCore.QRect(110, 170, 71, 16))
+        self.label_2.setGeometry(QtCore.QRect(130, 170, 71, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_2.setFont(font)
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.uname_linedit = QtGui.QLineEdit(Login)
-        self.uname_linedit.setGeometry(QtCore.QRect(210, 130, 113, 20))
+        self.uname_linedit.setGeometry(QtCore.QRect(230, 130, 113, 20))
         self.uname_linedit.setObjectName(_fromUtf8("uname_linedit"))
         self.pass_edit = QtGui.QLineEdit(Login)
-        self.pass_edit.setGeometry(QtCore.QRect(210, 170, 113, 20))
+        self.pass_edit.setGeometry(QtCore.QRect(230, 170, 113, 20))
         self.pass_edit.setObjectName(_fromUtf8("pass_edit"))
         
         self.pass_edit.setEchoMode(QtGui.QLineEdit.Password)
         self.login_btn = QtGui.QPushButton(Login)
-        self.login_btn.setGeometry(QtCore.QRect(180, 210, 75, 23))
+        self.login_btn.setGeometry(QtCore.QRect(200, 210, 75, 23))
         self.login_btn.setObjectName(_fromUtf8("login_btn"))
         self.login_btn.clicked.connect(self.loginCheck)
         self.label_3 = QtGui.QLabel(Login)
-        self.label_3.setGeometry(QtCore.QRect(130, 70, 161, 31))
+        self.label_3.setGeometry(QtCore.QRect(150, 70, 161, 31))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("MV Boli"))
         font.setPointSize(18)
