@@ -1,4 +1,4 @@
-ffrom Crypto.PublicKey import RSA
+from Crypto.PublicKey import RSA
 
 def genkey():
     keyPair = RSA.generate(1024)
@@ -13,4 +13,3 @@ def genkey():
     f = open("pubKey.pem", "w")
     f.write(str(keyPair.publickey().exportKey()))
     f.close()
-    
